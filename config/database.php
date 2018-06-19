@@ -78,6 +78,15 @@ return [
             'prefix' => '',
         ],
 
+        'odbc'   => [
+            'driver'   => 'pdo_odbc',
+            'dsn'      => 'odbc:TRLTVI04',
+            'host'     => '172.19.71.14',
+            'database' => 'repl_easy_sltvi36',
+            'username' => 'rigareporting',
+            'password' => 'VtbkD06Br7Sp',
+        ],
+
     ],
 
     /*

@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5bca48e56bbf3a25645858fcab9c285",
+    "content-hash": "2b4d3b3bfc25cf8ce01d28d43142f2bf",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2192,6 +2192,43 @@
             "time": "2018-04-29T07:56:09+00:00"
         },
         {
+            "name": "tck/odbc",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bencarter78/odbc.git",
+                "reference": "1bc2ca1628149b054cf13d528f40903be96d9829"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bencarter78/odbc/zipball/1bc2ca1628149b054cf13d528f40903be96d9829",
+                "reference": "1bc2ca1628149b054cf13d528f40903be96d9829",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "TCK\\Odbc": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "tck",
+                    "email": "ben@thecreativekind.co.uk"
+                }
+            ],
+            "description": "ODBC Connector for Laravel",
+            "time": "2016-09-18T08:35:46+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.1",
             "source": {
@@ -3986,7 +4023,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "tck/odbc": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
