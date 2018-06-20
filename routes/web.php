@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('main');
 
 Route::get('/leob1', 'ReportController@leob1')->name('leob1');
 Route::get('/leob2', 'ReportController@leob2')->name('leob2');
