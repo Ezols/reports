@@ -15,4 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/report', 'ReportController@index')->name('Report');
+Route::get('/leob1', 'ReportController@leob1')->name('leob1');
+Route::get('/leob2', 'ReportController@leob2')->name('leob2');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card card-default">
                 <div class="card-header">
-                   <h3>Latvenergo OB2</h3>
+                   <h3>Latvenergo OB1</h3>
                 </div>                
                 <table class="table">
                     <thead>
