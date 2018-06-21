@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        
             <div class="card card-default">
                 <div class="card-header">
                    <h3>Latvenergo OB2</h3>
@@ -50,7 +50,7 @@
                     </tbody>                   
                 </table>               
             </div>
-        </div>
+        
     </div>
 </div>
 @endsection
