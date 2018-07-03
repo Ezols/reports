@@ -6,11 +6,23 @@
         <div class="card card-default">
             <div class="card-header">
                 <h3>Passage</h3>
+
+            <form class="panel-body" action="{{ route('export') }}" method="get">
+                <div class="col-md-12">
+                    <label for="startDate">Chose date from:</label>       
+                    <input class ="form-control" type="datetime-local" id="startDate" name="startDate">
+                    <label for="endDate">Chose date till:</label>       
+                    <input class="form-control" type="datetime-local" id="endDate" name="endDate">   
+                    <input style="margin-top: 15px" class="btn btn-primary pull-right" type="submit" name="submit" value="Export">  
+                </div>
+            </form>
+
             </div>
 
             <table class="table">
                 <thead>
                     <th>Easycode</th>
+                    <th>Start time</th>
                     <th>Termination status</th>
                     <th>Agent</th>
                     <th>Contact date</th>
@@ -30,13 +42,13 @@
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Text1</th>
-                    <th>Text2</th>
                 </thead>
 
                 <tbody>
                     @foreach($Cards as $card)
                         <tr>
                             <td>{{ $card->easycode }}</td>
+                            <td>{{ $card->start_time }}</td>
                             <td>{{ $card->termination_status }}</td>
                             <td>{{ $card->ct_agent }}</td>
                             <td>{{ $card->ct_contact_date }}</td>
@@ -55,9 +67,7 @@
                             <td>{{ $card->ct_phone_callback }}</td>
                             <td>{{ $card->ct_name }}</td>
                             <td>{{ $card->ct_surname }}</td>
-                            <td>{{ $card->ct_cust1_text01 }}</td>
-                            <td>{{ $card->ct_cust1_text02 }}</td>
-                            
+                            <td>{{ $card->ct_cust1_text01 }}</td>                            
                         </tr>
                     @endforeach
                 </tbody>
