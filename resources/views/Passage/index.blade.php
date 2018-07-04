@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="card">
             
-            @if(isset($Cards))
+            @if(isset($cards))
             <table class="table">
                 <thead>
                     <th>Easycode</th>
@@ -44,7 +44,7 @@
                 </thead>
                 
                 <tbody>
-                    @foreach($Cards as $card)
+                    @foreach($cards as $card)
                         <tr>
                             <td>{{ $card->easycode }}</td>
                             <td>{{ $card->start_time }}</td>

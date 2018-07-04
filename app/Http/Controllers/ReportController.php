@@ -41,7 +41,7 @@ class ReportController extends Controller
 
         if(request()->display)
         {
-            $data['Cards'] = $this->querry($from, $to);
+            $data['cards'] = $this->querry($from, $to);
 
             return view('passage.index', $data);
         }
