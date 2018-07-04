@@ -72,7 +72,9 @@
                 </tbody>                
             </table>
             @else
+                <div class="m-2">
                     <h3>Chose dates to display results for Passage</h3>
+                </div>  
             @endif
         </div>
     </div>
