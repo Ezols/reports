@@ -1,24 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid">    
+    <div class="card card-default col-md-3 mx-auto m-3 p-3">      
+        <h3>Passage</h3>
+        <form class="panel-body" action="{{ route('export') }}" method="get">            
+            <label for="startDate">Chose date from:</label>       
+            <input class ="form-control" type="datetime-local" id="startDate" name="startDate">
+            <label for="endDate">Chose date till:</label>       
+            <input class="form-control" type="datetime-local" id="endDate" name="endDate">  
+            <input style="margin-top: 15px" class="btn btn-success pull-right" type="submit" name="display" value="Display"> 
+            <input style="margin-top: 15px" class="btn btn-primary pull-left" type="submit" name="submit" value="Export">  
+        </form>                 
+    </div>
+    
     <div class="row justify-content-center">
-        <div class="card card-default">
-            <div class="card-header">
-                <h3>Passage</h3>
-
-            <form class="panel-body" action="{{ route('export') }}" method="get">
-                <div class="col-md-12">
-                    <label for="startDate">Chose date from:</label>       
-                    <input class ="form-control" type="datetime-local" id="startDate" name="startDate">
-                    <label for="endDate">Chose date till:</label>       
-                    <input class="form-control" type="datetime-local" id="endDate" name="endDate">   
-                    <input style="margin-top: 15px" class="btn btn-primary pull-right" type="submit" name="submit" value="Export">  
-                </div>
-            </form>
-
-            </div>
-
+        <div class="card">
+            
+            @if(isset($Cards))
             <table class="table">
                 <thead>
                     <th>Easycode</th>
@@ -43,7 +42,7 @@
                     <th>Surname</th>
                     <th>Text1</th>
                 </thead>
-
+                
                 <tbody>
                     @foreach($Cards as $card)
                         <tr>
@@ -70,8 +69,11 @@
                             <td>{{ $card->ct_cust1_text01 }}</td>                            
                         </tr>
                     @endforeach
-                </tbody>
+                </tbody>                
             </table>
+            @else
+                    <h3>Chose dates to display results for Passage</h3>
+            @endif
         </div>
     </div>
 </div>
