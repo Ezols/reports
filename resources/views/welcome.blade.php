@@ -82,7 +82,8 @@
                     Reports
                 </div>
 
-                <div class="links">                    
+                <div class="links">
+                    <a href="/latvenergo">Latvenergo</a>                    
                     <a href="/leob1">Latvenergo OB 1</a>
                     <a href="/leob2">Latvenergo OB 2</a>
                     <a href="/passage">Passage</a>

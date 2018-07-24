@@ -7,6 +7,7 @@ use DB;
 use App\LE2;
 use App\LE1;
 use Excel;
+use App\Passage;
 use Illuminate\Support\Carbon;
 
 class ReportController extends Controller
@@ -21,6 +22,38 @@ class ReportController extends Controller
     {
         $data['Cards'] = LE2::orderBy('ct_contact_date', 'desc')->get();
         return view('LE2.index', $data);
+    }
+
+    public function latvenergo()
+    {
+        $data['leob1'] = DB::select(
+            DB::raw(
+                "SELECT *, 
+                ph_contact.status  
+                from ct_LV_OB_Latvener1 
+                join ph_contact 
+                on ct_LV_OB_Latvener1.easycode = dbo.ph_contact.code 
+                where (ct_call_type_id is NULL or ct_call_type_id = '999') 
+                and (ph_contact.status <> '17' and ph_contact.status <> '6' and ph_contact.status <> '3') 
+                order by easycode desc;
+                "
+            )
+        );
+
+        $data['leob2'] = DB::select(
+            DB::raw(
+                "SELECT *, 
+                ph_contact.status  
+                from ct_LV_OB_Latvener2 
+                join ph_contact 
+                on ct_LV_OB_Latvener2.easycode = dbo.ph_contact.code 
+                where (ct_call_type_id is NULL or ct_call_type_id = '999') 
+                and (ph_contact.status <> '17' and ph_contact.status <> '6' and ph_contact.status <> '3') 
+                order by easycode desc;
+                "
+            )
+        );
+        return view('latvenergo', $data);
     }
 
     public function passage()
@@ -57,7 +90,13 @@ class ReportController extends Controller
             })->export('xls');
         }         
     }
-    
+   
+    public function test()
+    {
+        
+        dd($querry);
+    }
+
     private function querry($from, $to)
     {
         $querry = DB::select(
