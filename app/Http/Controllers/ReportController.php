@@ -90,12 +90,6 @@ class ReportController extends Controller
             })->export('xls');
         }         
     }
-   
-    public function test()
-    {
-        
-        dd($querry);
-    }
 
     private function querry($from, $to)
     {

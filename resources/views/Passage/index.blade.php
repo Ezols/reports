@@ -48,7 +48,7 @@
                             <td>{{ $card->start_time }}</td>
                             <td>{{ $card->termination_status }}</td>
                             <td>{{ $card->ct_agent }}</td>
-                            <td>{{ $card->ct_contact_date }}</td>n[]
+                            <td>{{ $card->ct_contact_date }}</td>
                             <td>{{ $card->ct_call_type_name }}</td>
                             <td>{{ $card->ct_call_type_desc }}</td>
                             <td>{{ $card->ct_batch_name }}</td>
