@@ -125,12 +125,19 @@ class ReportController extends Controller
 
             FROM    
 
-            call_thread a INNER JOIN
-            thread b ON a.code = b.code join
-            global_call ON a.global_call = global_call.code join
-            ph_contact ON global_call.contact = ph_contact.code join
-            segment ON segment.thread = b.code join
-            ct_LV_PASSAGE_OB on global_call.contact = ct_LV_PASSAGE_OB.easycode
+            -- call_thread a INNER JOIN
+            -- thread b ON a.code = b.code join
+            -- global_call ON a.global_call = global_call.code join
+            -- ph_contact ON global_call.contact = ph_contact.code join
+            -- segment ON segment.thread = b.code join
+            -- ct_LV_PASSAGE_OB on global_call.contact = ct_LV_PASSAGE_OB.easycode
+
+            FROM call_thread a WITH(NOLOCK)
+            INNER JOIN thread b WITH(NOLOCK) ON a.code = b.code 
+            join global_call WITH(NOLOCK) ON a.global_call = global_call.code 
+            join ph_contact WITH(NOLOCK) ON global_call.contact = ph_contact.code 
+            join segment WITH(NOLOCK) ON segment.thread = b.code 
+            join ct_LV_PASSAGE_OB WITH(NOLOCK) on global_call.contact = ct_LV_PASSAGE_OB.easycode
 
             WHERE
         
