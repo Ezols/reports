@@ -132,7 +132,7 @@ class ReportController extends Controller
             -- segment ON segment.thread = b.code join
             -- ct_LV_PASSAGE_OB on global_call.contact = ct_LV_PASSAGE_OB.easycode
 
-            FROM call_thread a WITH(NOLOCK)
+            call_thread a WITH(NOLOCK)
             INNER JOIN thread b WITH(NOLOCK) ON a.code = b.code 
             join global_call WITH(NOLOCK) ON a.global_call = global_call.code 
             join ph_contact WITH(NOLOCK) ON global_call.contact = ph_contact.code 
