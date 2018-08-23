@@ -21,6 +21,7 @@
             <table class="table">
                 <thead>
                     <th>Easycode</th>
+                    <th>Leeds status</th>
                     <th>Start time</th>
                     <th>Termination status</th>
                     <th>Agent</th>
@@ -45,6 +46,7 @@
                     @foreach($cards as $card)
                         <tr>
                             <td>{{ $card->easycode }}</td>
+                            <td>{{ $card->status }}</td>
                             <td>{{ $card->start_time }}</td>
                             <td>{{ $card->termination_status }}</td>
                             <td>{{ $card->ct_agent }}</td>

@@ -4,6 +4,7 @@
 <table class="table">
     <tr>
         <th>Easycode</th>
+        <th>Leeds status</th>
         <th>Start time</th>
         <th>Termination status</th>
         <th>Agent</th>
@@ -29,6 +30,7 @@
     @foreach($exports as $export)
         <tr>
             <td>{{ $export->easycode }}</td>
+            <td>{{ $export->status }}</td>
             <td>{{ $export->start_time }}</td>
             <td>{{ $export->termination_status }}</td>
             <td>{{ $export->ct_agent }}</td>

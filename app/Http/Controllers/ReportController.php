@@ -74,7 +74,7 @@ class ReportController extends Controller
 
         if(request()->display)
         {
-            $data['cards'] = $this->querry($from, $to);
+            $data['cards'] = $this->statusQuerry($from, $to);
 
             return view('passage.index', $data);
         }
@@ -97,7 +97,8 @@ class ReportController extends Controller
             DB::raw(
             "SELECT   
 
-            distinct a.code, 
+            distinct a.code,
+            ph_contact.status, 
             a.termination_status,
             b.start_time,
             global_call.contact,
@@ -125,12 +126,59 @@ class ReportController extends Controller
 
             FROM    
 
-            -- call_thread a INNER JOIN
-            -- thread b ON a.code = b.code join
-            -- global_call ON a.global_call = global_call.code join
-            -- ph_contact ON global_call.contact = ph_contact.code join
-            -- segment ON segment.thread = b.code join
-            -- ct_LV_PASSAGE_OB on global_call.contact = ct_LV_PASSAGE_OB.easycode
+            call_thread a WITH(NOLOCK)
+            INNER JOIN thread b WITH(NOLOCK) ON a.code = b.code 
+            join global_call WITH(NOLOCK) ON a.global_call = global_call.code 
+            join ph_contact WITH(NOLOCK) ON global_call.contact = ph_contact.code 
+            join segment WITH(NOLOCK) ON segment.thread = b.code 
+            join ct_LV_PASSAGE_OB WITH(NOLOCK) on global_call.contact = ct_LV_PASSAGE_OB.easycode
+            join ct_LV_PASSAGE_OB AS Passage WITH(NOLOCK) on Passage.easycode = ph_contact.code
+
+            WHERE
+        
+            (b.start_time >= '$from')
+            AND
+            (b.start_time <= '$to')
+
+            AND (ph_contact.campaign = 1212);"
+        ));
+        return $querry;
+    }
+
+    private function statusQuerry($from, $to)
+    {
+        $querry = DB::select(
+            DB::raw(
+            "SELECT   
+
+            distinct a.code,
+            ph_contact.status, 
+            a.termination_status,
+            b.start_time,
+            global_call.contact,
+            global_call.ph_number,
+            segment.e_user,
+            ct_LV_PASSAGE_OB.easycode,
+            ct_LV_PASSAGE_OB.ct_agent,
+            ct_LV_PASSAGE_OB.ct_contact_date,
+            ct_LV_PASSAGE_OB.ct_call_type,
+            ct_LV_PASSAGE_OB.ct_call_type_name,
+            ct_LV_PASSAGE_OB.ct_call_type_desc,
+            ct_LV_PASSAGE_OB.ct_call_type_id,
+            ct_LV_PASSAGE_OB.ct_batch_name,
+            ct_LV_PASSAGE_OB.ct_load_date,
+            ct_LV_PASSAGE_OB.ct_num_calls,
+            ct_LV_PASSAGE_OB.ct_num_recalls,
+            ct_LV_PASSAGE_OB.ct_duration,
+            ct_LV_PASSAGE_OB.ct_talk_time,
+            ct_LV_PASSAGE_OB.ct_comments,
+            ct_LV_PASSAGE_OB.ct_phone1,
+            ct_LV_PASSAGE_OB.ct_phone_callback,
+            ct_LV_PASSAGE_OB.ct_name,
+            ct_LV_PASSAGE_OB.ct_surname,
+            ct_LV_PASSAGE_OB.ct_cust1_text01
+
+            FROM    
 
             call_thread a WITH(NOLOCK)
             INNER JOIN thread b WITH(NOLOCK) ON a.code = b.code 
@@ -138,8 +186,13 @@ class ReportController extends Controller
             join ph_contact WITH(NOLOCK) ON global_call.contact = ph_contact.code 
             join segment WITH(NOLOCK) ON segment.thread = b.code 
             join ct_LV_PASSAGE_OB WITH(NOLOCK) on global_call.contact = ct_LV_PASSAGE_OB.easycode
+            join ct_LV_PASSAGE_OB AS Passage WITH(NOLOCK) on Passage.easycode = ph_contact.code
 
             WHERE
+
+            status IN (0,3)
+
+            AND 
         
             (b.start_time >= '$from')
             AND
