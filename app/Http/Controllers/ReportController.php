@@ -196,3 +196,20 @@ class ReportController extends Controller
         return $querry;
     }
 }
+
+
+// 0 - Start. Must be made.
+// 1 - Exec. Ongoing contact.
+// 2 - Stop. Call terminated abnormally.
+// 3 - Done. Call successfully completed.
+// 6 - Agent death. Aborted because the agent performed a manual or automatic cleanup.
+// 8 - Invalid contact. Contact does not have an entry in the table attributes.
+// 9 - Reject contact. It has been impossible to bring attributes up to date on the database or a phone type used for the contact is not defined.
+// 10 - Created. Contact created for inbound.
+// 11 - Lock. Contact loaded by an agent.
+// 15 - In use by the Assisted Server. Internal use.
+// 16 - In use by the Assisted Server. Internal use.
+// 17 - Abort. Outbound contact abandoned.
+// 18 - Exec Recover. Ongoing contact in recovery process after the Assisted Server crashed.
+// 19 - Loc Recover. Contact loaded by an agent in recovery process after the Assisted Server crashed.
+// 100 - Logically deleted contact - you shouldn't really encounter this
