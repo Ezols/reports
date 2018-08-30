@@ -191,7 +191,7 @@ class ReportController extends Controller
             
             status in (0,3)
 
-            ORDER BY b.start_time DESC;"
+            ORDER BY ph_contact.status ASC;"
         ));
         return $querry;
     }
