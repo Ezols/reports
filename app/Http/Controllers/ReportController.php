@@ -95,10 +95,9 @@ class ReportController extends Controller
     {
         $querry = DB::select(
             DB::raw(
-            "SELECT   
-
-            distinct a.code,
-            ph_contact.status, 
+            "SELECT  DISTINCT
+            a.code, 
+			ph_contact.status,
             a.termination_status,
             b.start_time,
             global_call.contact,
@@ -106,7 +105,7 @@ class ReportController extends Controller
             segment.e_user,
             ct_LV_PASSAGE_OB.easycode,
             ct_LV_PASSAGE_OB.ct_agent,
-            ct_LV_PASSAGE_OB.ct_contact_date,
+			ct_LV_PASSAGE_OB.ct_contact_date,
             ct_LV_PASSAGE_OB.ct_call_type,
             ct_LV_PASSAGE_OB.ct_call_type_name,
             ct_LV_PASSAGE_OB.ct_call_type_desc,
@@ -125,22 +124,19 @@ class ReportController extends Controller
             ct_LV_PASSAGE_OB.ct_cust1_text01
 
             FROM    
-
-            call_thread a WITH(NOLOCK)
-            INNER JOIN thread b WITH(NOLOCK) ON a.code = b.code 
+			(SELECT MAX(code) code, contact FROM data_context WHERE campaign=1212 GROUP BY contact) dc
+            INNER JOIN (SELECT MAX(code) code, data_context FROM thread WITH(NOLOCK)
+							WHERE start_time BETWEEN '$from' AND '$to'
+							GROUP BY data_context) th ON dc.code=th.data_context
+			INNER JOIN thread b WITH(NOLOCK) ON th.code=b.code
+			INNER JOIN call_thread a WITH(NOLOCK) ON a.code = b.code 
             join global_call WITH(NOLOCK) ON a.global_call = global_call.code 
             join ph_contact WITH(NOLOCK) ON global_call.contact = ph_contact.code 
             join segment WITH(NOLOCK) ON segment.thread = b.code 
             join ct_LV_PASSAGE_OB WITH(NOLOCK) on global_call.contact = ct_LV_PASSAGE_OB.easycode
-            join ct_LV_PASSAGE_OB AS Passage WITH(NOLOCK) on Passage.easycode = ph_contact.code
+            join ct_LV_PASSAGE_OB AS Passage WITH(NOLOCK) on Passage.easycode = ph_contact.code		
 
-            WHERE
-        
-            (b.start_time >= '$from')
-            AND
-            (b.start_time <= '$to')
-
-            AND (ph_contact.campaign = 1212);"
+            ORDER BY 8;"
         ));
         return $querry;
     }
@@ -149,10 +145,9 @@ class ReportController extends Controller
     {
         $querry = DB::select(
             DB::raw(
-            "SELECT   
-
-            distinct a.code,
-            ph_contact.status, 
+            "SELECT  DISTINCT
+            a.code, 
+			ph_contact.status,
             a.termination_status,
             b.start_time,
             global_call.contact,
@@ -160,7 +155,7 @@ class ReportController extends Controller
             segment.e_user,
             ct_LV_PASSAGE_OB.easycode,
             ct_LV_PASSAGE_OB.ct_agent,
-            ct_LV_PASSAGE_OB.ct_contact_date,
+			ct_LV_PASSAGE_OB.ct_contact_date,
             ct_LV_PASSAGE_OB.ct_call_type,
             ct_LV_PASSAGE_OB.ct_call_type_name,
             ct_LV_PASSAGE_OB.ct_call_type_desc,
@@ -179,26 +174,24 @@ class ReportController extends Controller
             ct_LV_PASSAGE_OB.ct_cust1_text01
 
             FROM    
-
-            call_thread a WITH(NOLOCK)
-            INNER JOIN thread b WITH(NOLOCK) ON a.code = b.code 
+			(SELECT MAX(code) code, contact FROM data_context WHERE campaign=1212 GROUP BY contact) dc
+            INNER JOIN (SELECT MAX(code) code, data_context FROM thread WITH(NOLOCK)
+							WHERE start_time BETWEEN '$from' AND '$to'
+							GROUP BY data_context) th ON dc.code=th.data_context
+			INNER JOIN thread b WITH(NOLOCK) ON th.code=b.code
+			INNER JOIN call_thread a WITH(NOLOCK) ON a.code = b.code 
             join global_call WITH(NOLOCK) ON a.global_call = global_call.code 
             join ph_contact WITH(NOLOCK) ON global_call.contact = ph_contact.code 
             join segment WITH(NOLOCK) ON segment.thread = b.code 
             join ct_LV_PASSAGE_OB WITH(NOLOCK) on global_call.contact = ct_LV_PASSAGE_OB.easycode
             join ct_LV_PASSAGE_OB AS Passage WITH(NOLOCK) on Passage.easycode = ph_contact.code
+				
 
             WHERE
+            
+            status in (0,3)
 
-            status IN (0,3)
-
-            AND 
-        
-            (b.start_time >= '$from')
-            AND
-            (b.start_time <= '$to')
-
-            AND (ph_contact.campaign = 1212);"
+            ORDER BY 8;"
         ));
         return $querry;
     }
